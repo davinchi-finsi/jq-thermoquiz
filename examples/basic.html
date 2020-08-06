@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Basic example</title>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="../dist/jquery.thermoquiz.min.js"></script>
+    </head>
+    <body>  
+        <div id="thq">
+            <div id="thq-t" data-thermoquiz-thermometer></div>
+            <ul data-thermoquiz-options>
+                <li>
+                    <label for="o1">+5</label>
+                    <input id = "o1" type="checkbox" data-thermoquiz-option="5"/>
+                </li>
+                <li>
+                    <label for="o2">+4</label>
+                    <input id = "o2" type="checkbox" data-thermoquiz-option="4"/>
+                </li>
+                <li>
+                    <label for="o3">+2</label>
+                    <input id = "o3" type="checkbox" data-thermoquiz-option="2"/>
+                </li>
+                <li>
+                    <label for="o4">-5</label>
+                    <input id = "o4" type="checkbox" data-thermoquiz-option="-5"/>
+                </li>
+                <li>
+                    <label for="o5">-4</label>
+                    <input id = "o5" type="checkbox" data-thermoquiz-option="-4"/>
+                </li>
+                <li>
+                    <label for="o6">-2</label>
+                    <input id = "o6" type="checkbox" data-thermoquiz-option="-2"/>
+                </li>
+            </ul>
+            <button data-thermoquiz-check>Check answers</button>
+            <div data-thermoquiz-feedback>
+                <p data-thermoquiz-feedback-item="10,7">Feedback 10-7</p>
+                <p data-thermoquiz-feedback-item="6,4">Feedback 6-4</p>
+                <p data-thermoquiz-feedback-item="3,0">Feedback 3-0</p>
+            </div>
+        </div>
+        <button id="reset">Reset</button>
+        <script>
+            $("#thq").thermoQuiz({
+                //horizontal: true,
+                topText:"Top value",
+                bottomText:"Bottom value",
+                value: 5,
+                thermometer: {
+                    height: 300,
+                    width: 400,
+                    pathToSVG: "https://raw.githubusercontent.com/davedupplaw/jquery.thermometer/94b07aa6dbbe71b293a66b999bdb5abf1b078565/svg/thermo-bottom.svg",
+                    liquidColour: (value) => {
+                    let color;
+                    if ( value < 4) {
+                        color = "#00bcd4";
+                    } else if (value >=4 && value <= 8) {
+                        color = "#ffcb00";
+                    } else {
+                        color = "#ff0000";
+                    }
+                    return color;
+                    }
+                }
+            });
+            $("#reset").on("click",()=>$("#thq").thermoQuiz("reset"));
+        </script>
+    </body>
+</html>
